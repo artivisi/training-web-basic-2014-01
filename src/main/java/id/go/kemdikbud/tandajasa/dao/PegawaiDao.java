@@ -10,7 +10,10 @@ import id.go.kemdikbud.tandajasa.domain.Pegawai;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,6 +65,27 @@ public class PegawaiDao {
         } catch (SQLException ex) {
             System.out.println("Terjadi kesalahan pada waktu insert");
             ex.printStackTrace();
+        }
+    }
+    
+    public List<Pegawai> cariSemuaPegawai(){
+        try {
+            String sql = "select * from pegawai";
+            
+            PreparedStatement ps = koneksiDatabase.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<Pegawai> hasil = new ArrayList<Pegawai>();
+            while(rs.next()){
+                Pegawai p = new Pegawai();
+                p.setId(rs.getInt("id"));
+                p.setNip(rs.getString("nip"));
+                p.setNama(rs.getString("nama"));
+                hasil.add(p);
+            }
+            return hasil;
+        } catch (SQLException ex) {
+            Logger.getLogger(PegawaiDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }
