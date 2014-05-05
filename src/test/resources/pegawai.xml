@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <pegawai 
+        id="100"
+        nip="999"
+        nama="Dadang"
+    />
+    
+    
+    <pegawai 
+        id="101"
+        nip="998"
+        nama="Endy"
+    />
+    
+    
+    
+</dataset>
