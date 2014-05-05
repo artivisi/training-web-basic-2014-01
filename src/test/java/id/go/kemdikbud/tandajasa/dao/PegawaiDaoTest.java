@@ -7,13 +7,19 @@
 package id.go.kemdikbud.tandajasa.dao;
 
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,12 +48,23 @@ public class PegawaiDaoTest {
             
             // Connect ke database
             koneksiDatabase = DriverManager.getConnection(url, username, password);
+            
+            resetDatabase();
         } catch (SQLException ex) {
             System.out.println("Koneksi ke database gagal");
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             System.out.println("Database driver tidak ditemukan");
             ex.printStackTrace();
+        }
+    }
+    
+    public void resetDatabase(){
+        try {
+            DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(koneksiDatabase),
+                    new FlatXmlDataSetBuilder().build(new File("src/test/resources/pegawai.xml")));
+        } catch (Exception ex) {
+            Logger.getLogger(PegawaiDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -83,5 +100,17 @@ public class PegawaiDaoTest {
         rsSetelah.close();
         
         Assert.assertEquals(new Long(jumlahRecordSebelum + 1), new Long(jumlahRecordSetelah));
+    }
+    
+    @Test
+    public void testCariSemua(){
+        Long jumlahRecord = 2L;
+        
+        PegawaiDao pd = new PegawaiDao();
+        pd.connect();
+        List<Pegawai> hasil = pd.cariSemuaPegawai();
+        pd.disconnect();
+        
+        Assert.assertEquals(new Long(jumlahRecord), new Long(hasil.size()));
     }
 }
