@@ -1,0 +1,17 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+	<bean id="u" class="id.go.kemdikbud.tandajasa.domain.UnitKerja">
+		<property name="kode" value="U-99"/>
+		<property name="nama" value="Unit Kerja 99"/>
+	</bean>
+	<bean id="p" class="id.go.kemdikbud.tandajasa.domain.Pegawai">
+		<property name="nip" value="1001"/>
+		<property name="nama" value="Pegawai 1001"/>
+		<property name="unitKerja" ref="u"/>
+	</bean>
+</beans>
