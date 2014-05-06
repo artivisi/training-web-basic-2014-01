@@ -14,6 +14,7 @@ public class Pegawai {
     private Integer id;
     private String nip;
     private String nama;
+    private UnitKerja unitKerja;
 
     public Integer getId() {
         return id;
@@ -39,5 +40,11 @@ public class Pegawai {
         this.nama = nama;
     }
     
-    
+    public UnitKerja getUnitKerja() {
+        return unitKerja;
+    }
+
+    public void setUnitKerja(UnitKerja unitKerja) {
+        this.unitKerja = unitKerja;
+    }
 }
