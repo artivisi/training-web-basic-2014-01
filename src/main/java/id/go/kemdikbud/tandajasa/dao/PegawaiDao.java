@@ -17,16 +17,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author endy
  */
+@Repository
 public class PegawaiDao {
+    @Autowired
     private DataSource dataSource;
-    
-    public void setDataSource(DataSource ds){
-        this.dataSource = ds;
-    }
     
     public void save(Pegawai p){
         try {
