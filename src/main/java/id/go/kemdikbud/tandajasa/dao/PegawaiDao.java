@@ -8,7 +8,7 @@ package id.go.kemdikbud.tandajasa.dao;
 
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,46 +22,21 @@ import java.util.logging.Logger;
  * @author endy
  */
 public class PegawaiDao {
-    private Connection koneksiDatabase;
+    private DataSource dataSource;
     
-    public void connect(){
-        try {
-            String username = "belajar";
-            String password = "java";
-            String driver = "org.postgresql.Driver";
-            String url = "jdbc:postgresql://localhost/tandajasadb";
-            //String driver = "com.mysql.jdbc.Driver";
-            //String url = "jdbc:mysql://localhost/tandajasadb";
-            
-            // inisialisasi driver database
-            Class.forName(driver);
-            
-            // Connect ke database
-            koneksiDatabase = DriverManager.getConnection(url, username, password);
-        } catch (SQLException ex) {
-            System.out.println("Koneksi ke database gagal");
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Database driver tidak ditemukan");
-            ex.printStackTrace();
-        }
-    }
-    
-    public void disconnect(){
-        try {
-            koneksiDatabase.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PegawaiDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void setDataSource(DataSource ds){
+        this.dataSource = ds;
     }
     
     public void save(Pegawai p){
         try {
+            Connection koneksiDatabase = dataSource.getConnection();
             String sql = "insert into pegawai (nip, nama) values (?,?)";
             PreparedStatement ps = koneksiDatabase.prepareStatement(sql);
             ps.setString(1, p.getNip());
             ps.setString(2, p.getNama());
             ps.executeUpdate();
+            koneksiDatabase.close();
         } catch (SQLException ex) {
             System.out.println("Terjadi kesalahan pada waktu insert");
             ex.printStackTrace();
@@ -71,7 +46,8 @@ public class PegawaiDao {
     public List<Pegawai> cariSemuaPegawai(){
         try {
             String sql = "select * from pegawai";
-            
+
+            Connection koneksiDatabase = dataSource.getConnection();
             PreparedStatement ps = koneksiDatabase.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Pegawai> hasil = new ArrayList<Pegawai>();
@@ -82,6 +58,7 @@ public class PegawaiDao {
                 p.setNama(rs.getString("nama"));
                 hasil.add(p);
             }
+            koneksiDatabase.close();
             return hasil;
         } catch (SQLException ex) {
             Logger.getLogger(PegawaiDao.class.getName()).log(Level.SEVERE, null, ex);
