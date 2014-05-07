@@ -1,33 +1,56 @@
 package id.go.kemdikbud.tandajasa.domain;
 
-public class UnitKerja{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+<<<<<<< HEAD
+=======
 
+@Entity
+public class UnitKerja{
+	@Id @GeneratedValue
 	private Integer id;
 	private String kode;
 	private String nama;
+>>>>>>> 1cde111cefaccf06f57b9601a8497604712dd61f
 
-	public Integer getId(){
-		return this.id;
+@Entity
+public class UnitKerja{
+        @Id @GeneratedValue
+	private Integer IdUker;
+	private String NamaUker;
+	private String AlmUker;
+        private Integer TelpUker;
+
+	public Integer getIdUker(){
+		return this.IdUker;
 	}
 
-	public void setId(Integer id){
-		this.id = id;
+	public void setIdUker(Integer IdUker){
+		this.IdUker = IdUker;
 	}
 
-	public String getKode(){
-		return this.kode;
+	public String getNamaUker(){
+		return this.NamaUker;
 	}
 
-	public void setKode(String kode){
-		this.kode = kode;
+	public void setNamaUker(String NamaUker){
+		this.NamaUker = NamaUker;
 	}
 
-	public String getNama(){
-		return this.nama;
+	public String getAlmUker(){
+		return this.AlmUker;
 	}
 
-	public void setNama(String nama){
-		this.nama = nama;
+	public void setAlmUker(String AlmUker){
+		this.AlmUker = AlmUker;
+	}
+        
+        public Integer getTelpUker(){
+		return this.TelpUker;
 	}
 
+	public void setTelpUker(Integer TelpUker){
+		this.TelpUker = TelpUker;
+	}
 }
