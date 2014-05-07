@@ -23,7 +23,7 @@ public class Golongan {
 		return this.nama;
 	}
 	
-	public void setNama(){
+	public void setNama(String nama){
 		this.nama = nama;
 	}
 	
