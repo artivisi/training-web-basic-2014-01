@@ -6,15 +6,21 @@
 
 package id.go.kemdikbud.tandajasa.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  *
  * @author endy
  */
+@Entity
 public class Pegawai {
+    @Id @GeneratedValue
     private Integer id;
     private String nip;
     private String nama;
-    private UnitKerja unitKerja;
+    //private UnitKerja unitKerja;
 
     public Integer getId() {
         return id;
@@ -39,7 +45,7 @@ public class Pegawai {
     public void setNama(String nama) {
         this.nama = nama;
     }
-    
+    /*
     public UnitKerja getUnitKerja() {
         return unitKerja;
     }
@@ -47,4 +53,5 @@ public class Pegawai {
     public void setUnitKerja(UnitKerja unitKerja) {
         this.unitKerja = unitKerja;
     }
+    */
 }
