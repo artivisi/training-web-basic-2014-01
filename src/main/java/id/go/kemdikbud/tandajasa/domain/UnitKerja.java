@@ -3,6 +3,16 @@ package id.go.kemdikbud.tandajasa.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
+
+@Entity
+public class UnitKerja{
+	@Id @GeneratedValue
+	private Integer id;
+	private String kode;
+	private String nama;
+>>>>>>> 1cde111cefaccf06f57b9601a8497604712dd61f
 
 @Entity
 public class UnitKerja{
