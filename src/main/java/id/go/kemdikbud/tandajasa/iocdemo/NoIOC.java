@@ -14,11 +14,11 @@ public class NoIOC {
 		UnitKerja u = new UnitKerja();
 		u.setKode("UK-001");
 		u.setNama("Unit Kerja 001");
-		p.setUnitKerja(u);
+		//p.setUnitKerja(u);
 
 		System.out.println("ID : "+p.getId());
 		System.out.println("Nama : "+p.getNama());
-		System.out.println("Unit Kerja : "+p.getUnitKerja().getNama());
+		//System.out.println("Unit Kerja : "+p.getUnitKerja().getNama());
 		
 		
 	}

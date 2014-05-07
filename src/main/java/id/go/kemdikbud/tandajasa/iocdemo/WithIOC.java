@@ -14,7 +14,7 @@ public class WithIOC {
 		Pegawai xx = (Pegawai) ctx.getBean("p");
 		System.out.println("ID : "+xx.getId());
 		System.out.println("Nama : "+xx.getNama());
-		System.out.println("Unit Kerja : "+xx.getUnitKerja().getNama());
+		//System.out.println("Unit Kerja : "+xx.getUnitKerja().getNama());
 		
 	}
 
