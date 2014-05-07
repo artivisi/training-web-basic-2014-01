@@ -11,10 +11,12 @@ public class NoIOC {
 		p.setNip("333");
 		p.setNama("Endy Muhardin");
 
+                /*
 		UnitKerja u = new UnitKerja();
 		u.setKode("UK-001");
 		u.setNama("Unit Kerja 001");
-		//p.setUnitKerja(u);
+		*/
+                        //p.setUnitKerja(u);
 
 		System.out.println("ID : "+p.getId());
 		System.out.println("Nama : "+p.getNama());
