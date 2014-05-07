@@ -9,6 +9,8 @@ package id.go.kemdikbud.tandajasa.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,6 +23,10 @@ public class Pegawai {
     private String nip;
     private String nama;
     //private UnitKerja unitKerja;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_golongan", nullable = false)
+    private Golongan golongan;
 
     public Integer getId() {
         return id;
@@ -45,6 +51,8 @@ public class Pegawai {
     public void setNama(String nama) {
         this.nama = nama;
     }
+    
+    
     /*
     public UnitKerja getUnitKerja() {
         return unitKerja;
@@ -54,4 +62,12 @@ public class Pegawai {
         this.unitKerja = unitKerja;
     }
     */
+
+    public Golongan getGolongan() {
+        return golongan;
+    }
+
+    public void setGolongan(Golongan golongan) {
+        this.golongan = golongan;
+    }
 }

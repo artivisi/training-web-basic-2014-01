@@ -6,6 +6,7 @@
 
 package id.go.kemdikbud.tandajasa.dao;
 
+import id.go.kemdikbud.tandajasa.domain.Golongan;
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
 import java.io.File;
 import javax.sql.DataSource;
@@ -63,9 +64,13 @@ public class PegawaiDaoTest {
     
     @Test
     public void testInsert() throws Exception {
+        Golongan g = new Golongan();
+        g.setId(99);
+        
         Pegawai p = new Pegawai();
         p.setNip("123");
         p.setNama("Endy Muhardin");
+        p.setGolongan(g);
         
         DataSource ds = ctx.getBean(DataSource.class);
         Connection koneksiDatabase = ds.getConnection();
