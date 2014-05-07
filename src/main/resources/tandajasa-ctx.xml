@@ -1,39 +1,61 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="id.go.kemdikbud.tandajasa.dao"/>
 
-	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property 
-			name="driverClassName" 
-			value="org.postgresql.Driver"/>
-		<property 	
-			name="url" 
-			value="jdbc:postgresql://localhost/tandajasadb"/>
-		<property 	
-			name="username" 
-			value="belajar"/>
-		<property 	
-			name="password" 
-			value="java"/>
-		<property 	
-			name="initialSize" 
-			value="8"/>
-		<property 	
-			name="maxTotal" 
-			value="80"/>
-		<property 	
-			name="minIdle" 
-			value="8"/>
-		<property 	
-			name="maxWaitMillis" 
-			value="10"/>
-	</bean>
+    <bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property 
+            name="driverClassName" 
+            value="org.postgresql.Driver"/>
+        <property 	
+            name="url" 
+            value="jdbc:postgresql://localhost/tandajasadb"/>
+        <property 	
+            name="username" 
+            value="belajar"/>
+        <property 	
+            name="password" 
+            value="java"/>
+        <property 	
+            name="initialSize" 
+            value="8"/>
+        <property 	
+            name="maxTotal" 
+            value="80"/>
+        <property 	
+            name="minIdle" 
+            value="8"/>
+        <property 	
+            name="maxWaitMillis" 
+            value="10"/>
+    </bean>
+
+    <!-- session factory untuk hibernate -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          p:dataSource-ref="ds"
+          p:packagesToScan="id.go.kemdikbud.tandajasa.domain">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- transaction manager -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+              p:sessionFactory-ref="sessionFactory"/>
+    <tx:annotation-driven />
 
 </beans>
