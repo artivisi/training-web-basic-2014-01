@@ -6,10 +6,13 @@
 
 package id.go.kemdikbud.tandajasa.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -27,6 +30,9 @@ public class Pegawai {
     @ManyToOne
     @JoinColumn(name = "id_golongan", nullable = false)
     private Golongan golongan;
+    
+    @ManyToMany(mappedBy = "daftarAnggota")
+    private List<Proyek> daftarProyek = new ArrayList<Proyek>();
 
     public Integer getId() {
         return id;
