@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Golongan {
 	@Id @GeneratedValue
 	private Integer id;
-	private String nama;
+	private String nama; 
 	
 	public Integer getId(){
 		return this.id;
