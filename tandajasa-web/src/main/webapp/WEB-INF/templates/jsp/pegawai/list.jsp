@@ -15,6 +15,8 @@
     <body>
         <h1>Daftar Pegawai</h1>
         
+        <a href="form">Tambah Data</a>
+        
         <table border="1">
             <thead>
                 <tr>

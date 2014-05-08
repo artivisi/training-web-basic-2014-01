@@ -27,19 +27,26 @@ import org.springframework.transaction.annotation.Transactional;
  * @author endy
  */
 @Repository
+@Transactional
 public class PegawaiDao {
     @Autowired
     private SessionFactory sessionFactory;
     
-    @Transactional
     public void save(Pegawai p){
         sessionFactory.getCurrentSession().saveOrUpdate(p);
     }
     
-    @Transactional
     public List<Pegawai> cariSemuaPegawai(){
         return sessionFactory.getCurrentSession()
                 .createQuery("select p from Pegawai p order by p.nip")
                 .list();
+    }
+    
+    public Pegawai cariById(Integer id) {
+        if(id == null){
+            return null;
+        }
+        
+        return (Pegawai) sessionFactory.getCurrentSession().get(Pegawai.class, id);
     }
 }

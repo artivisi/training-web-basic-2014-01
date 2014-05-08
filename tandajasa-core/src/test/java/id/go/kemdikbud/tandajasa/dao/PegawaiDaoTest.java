@@ -99,4 +99,11 @@ public class PegawaiDaoTest {
         
         Assert.assertEquals(new Long(jumlahRecord), new Long(hasil.size()));
     }
+    
+    @Test
+    public void testCariById(){
+        PegawaiDao pd = (PegawaiDao)ctx.getBean("pegawaiDao");
+        Assert.assertNotNull(pd.cariById(100));
+        Assert.assertNull(pd.cariById(1000));
+    }
 }
