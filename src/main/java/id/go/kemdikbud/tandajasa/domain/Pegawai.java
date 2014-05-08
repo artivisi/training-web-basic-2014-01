@@ -14,12 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author endy
  */
 @Entity
+@Table(name = "pegawai")
 public class Pegawai {
     @Id @GeneratedValue
     private Integer id;

@@ -10,12 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author endy
  */
 @Entity
+@Table(name = "golongan")
 public class Golongan {
     @Id @GeneratedValue
     private Integer id;
