@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="id.go.kemdikbud.tandajasa.dao"/>
-    <context:property-placeholder 
+    <context:property-placeholder ignore-resource-not-found="true"
         location="
             classpath:jdbc.properties,
             classpath:jdbc.properties.private
