@@ -1,3 +1,6 @@
+# Konfigurasi masing-masing programmer
+jdbc.properties.private
+
 logs
 
 # IntelliJ IDEA
