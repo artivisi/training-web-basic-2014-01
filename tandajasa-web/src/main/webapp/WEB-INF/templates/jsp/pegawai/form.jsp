@@ -39,9 +39,18 @@
                     <tr>
                         <td>Golongan</td>
                         <td>
-                            <input name="golongan.id">
+                            <form:select path="golongan">
+                                <form:option value="">Pilih Golongan</form:option>
+                                <form:options 
+                                    items="${daftarGolongan}"
+                                    itemLabel="kode"
+                                    itemValue="id"
+                                />
+                            </form:select>
                         </td>
-                        <td>Pesan error</td>
+                        <td>
+                            <form:errors path="golongan" />
+                        </td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>

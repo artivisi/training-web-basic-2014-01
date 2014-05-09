@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,7 +30,7 @@ public class Pegawai {
     @Id @GeneratedValue
     private Integer id;
     
-    @NotNull @NotEmpty @Size(max = 10)
+    @NotNull @NotEmpty @Size(max = 10) @Pattern(regexp = "^[0-9]*$")
     private String nip;
     
     @NotNull @NotEmpty @Size(min = 3)

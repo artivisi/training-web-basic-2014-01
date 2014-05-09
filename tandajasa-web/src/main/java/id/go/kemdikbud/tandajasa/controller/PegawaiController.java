@@ -6,15 +6,19 @@
 
 package id.go.kemdikbud.tandajasa.controller;
 
+import id.go.kemdikbud.tandajasa.dao.GolonganDao;
 import id.go.kemdikbud.tandajasa.dao.PegawaiDao;
 import id.go.kemdikbud.tandajasa.domain.Golongan;
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
+import id.go.kemdikbud.tandajasa.editor.GolonganEditor;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,16 +32,28 @@ import org.springframework.web.bind.support.SessionStatus;
 @Controller
 public class PegawaiController {
     
-    @Autowired private PegawaiDao pd;
+    @Autowired private PegawaiDao pegawaiDao;
+    @Autowired private GolonganDao golonganDao;
+    
+    @InitBinder
+    public void setupConverter(WebDataBinder binder){
+        binder.registerCustomEditor(Golongan.class, new GolonganEditor(golonganDao));
+        
+    }
     
     @RequestMapping("/pegawai/list")
     public ModelMap daftarPegawai(){
         System.out.println("Daftar Pegawai");
-        List<Pegawai> data = pd.cariSemuaPegawai();
+        List<Pegawai> data = pegawaiDao.cariSemuaPegawai();
         
         ModelMap mm = new ModelMap();
         mm.addAttribute("daftarPegawai", data);
         return mm;
+    }
+    
+    @ModelAttribute("daftarGolongan")
+    public List<Golongan> daftarGolongan(){
+        return golonganDao.semuaGolongan();
     }
     
     @RequestMapping(value = "/pegawai/form", method = RequestMethod.GET)
@@ -46,7 +62,7 @@ public class PegawaiController {
         mm.addAttribute("pegawai", new Pegawai());
         
         if(id != null){
-            Pegawai p = pd.cariById(id);
+            Pegawai p = pegawaiDao.cariById(id);
             if(p != null){
                 mm.addAttribute("pegawai", p);
                 System.out.println("Pegawai : "+p.getNama());
@@ -58,16 +74,11 @@ public class PegawaiController {
     
     @RequestMapping(value = "/pegawai/form", method = RequestMethod.POST)
     public String prosesForm(@ModelAttribute @Valid Pegawai pegawai, BindingResult errors, SessionStatus status){
-        Golongan g = new Golongan();
-        g.setId(99);
-        
-        pegawai.setGolongan(g);
-        
         if(errors.hasErrors()){
             return "/pegawai/form";
         }
         
-        pd.save(pegawai);
+        pegawaiDao.save(pegawai);
         status.setComplete();
         return "redirect:list";
     }

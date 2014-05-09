@@ -5,6 +5,10 @@
         id="99"
         kode="1A"
     />
+    <golongan 
+        id="98"
+        kode="2A"
+    />
 
     <pegawai 
         id="100"
