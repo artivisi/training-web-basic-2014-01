@@ -91,6 +91,32 @@ public class PegawaiDaoTest {
     }
     
     @Test
+    public void testHapus() throws Exception {
+        DataSource ds = ctx.getBean(DataSource.class);
+        Connection koneksiDatabase = ds.getConnection();
+            
+        PreparedStatement ps = koneksiDatabase.prepareStatement("select count(*) as jumlah from pegawai");
+        ResultSet rsSebelum = ps.executeQuery();
+        Assert.assertTrue(rsSebelum.next());
+        Long jumlahRecordSebelum = rsSebelum.getLong(1);
+        rsSebelum.close();
+        
+        PegawaiDao pd = (PegawaiDao)ctx.getBean("pegawaiDao");
+        Pegawai p = pd.cariById(100);
+        Assert.assertNotNull(p);
+        pd.delete(p);
+        
+        ResultSet rsSetelah = ps.executeQuery();
+        Assert.assertTrue(rsSetelah.next());
+        Long jumlahRecordSetelah = rsSetelah.getLong("jumlah");
+        rsSetelah.close();
+        
+        koneksiDatabase.close();
+        Assert.assertEquals(new Long(jumlahRecordSebelum - 1), new Long(jumlahRecordSetelah));
+    }
+    
+    
+    @Test
     public void testCariSemua(){
         Long jumlahRecord = 2L;
         

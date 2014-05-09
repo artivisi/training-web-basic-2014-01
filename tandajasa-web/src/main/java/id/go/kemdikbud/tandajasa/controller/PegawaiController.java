@@ -84,4 +84,13 @@ public class PegawaiController {
         status.setComplete();
         return "redirect:list";
     }
+    
+    @RequestMapping(value = "/pegawai/delete", method = RequestMethod.GET)
+    public String hapus(@RequestParam Integer id){
+        Pegawai p = pegawaiDao.cariById(id);
+        if(p != null){
+            pegawaiDao.delete(p);
+        }
+        return "redirect:list";
+    }
 }

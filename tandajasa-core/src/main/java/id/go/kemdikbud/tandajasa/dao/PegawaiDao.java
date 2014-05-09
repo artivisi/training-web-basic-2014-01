@@ -63,4 +63,8 @@ public class PegawaiDao {
         
         return (Pegawai) sessionFactory.getCurrentSession().get(Pegawai.class, id);
     }
+
+    public void delete(Pegawai p) {
+        sessionFactory.getCurrentSession().delete(p);
+    }
 }
