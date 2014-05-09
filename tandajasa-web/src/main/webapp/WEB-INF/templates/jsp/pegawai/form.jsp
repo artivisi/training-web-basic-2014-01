@@ -23,14 +23,18 @@
                         <td>
                             <form:input path="nip"/>
                         </td>
-                        <td>Pesan error</td>
+                        <td>
+                            <form:errors path="nip" />
+                        </td>
                     </tr>
                     <tr>
                         <td>Nama</td>
                         <td>
                             <form:input path="nama"/>
                         </td>
-                        <td>Pesan error</td>
+                        <td>
+                            <form:errors path="nama" />
+                        </td>
                     </tr>
                     <tr>
                         <td>Golongan</td>

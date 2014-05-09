@@ -7,14 +7,19 @@
 package id.go.kemdikbud.tandajasa.controller;
 
 import id.go.kemdikbud.tandajasa.dao.PegawaiDao;
+import id.go.kemdikbud.tandajasa.domain.Golongan;
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  *
@@ -49,5 +54,21 @@ public class PegawaiController {
         }
         
         return mm;
+    }
+    
+    @RequestMapping(value = "/pegawai/form", method = RequestMethod.POST)
+    public String prosesForm(@ModelAttribute @Valid Pegawai pegawai, BindingResult errors, SessionStatus status){
+        Golongan g = new Golongan();
+        g.setId(99);
+        
+        pegawai.setGolongan(g);
+        
+        if(errors.hasErrors()){
+            return "/pegawai/form";
+        }
+        
+        pd.save(pegawai);
+        status.setComplete();
+        return "redirect:list";
     }
 }

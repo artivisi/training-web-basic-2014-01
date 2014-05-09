@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -25,7 +28,11 @@ import javax.persistence.Table;
 public class Pegawai {
     @Id @GeneratedValue
     private Integer id;
+    
+    @NotNull @NotEmpty @Size(max = 10)
     private String nip;
+    
+    @NotNull @NotEmpty @Size(min = 3)
     private String nama;
     //private UnitKerja unitKerja;
     
