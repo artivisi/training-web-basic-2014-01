@@ -15,9 +15,14 @@
     <body>
         <h1>Daftar Pegawai</h1>
         
-        <a href="form">Tambah Data</a>
+        <a href="form" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>
+            Tambah Data
+        </a>
+
+        <hr>
         
-        <table border="1">
+        <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>
                 <tr>
                     <th>NIP</th>
@@ -33,8 +38,14 @@
                     <td>${x.nama}</td>
                     <td>${x.golongan.kode}</td>
                     <td>
-                        <a href="form?id=${x.id}">edit</a> | 
-                        <a href="delete?id=${x.id}">hapus</a>
+                        <a class="btn" href="form?id=${x.id}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            edit
+                        </a> | 
+                        <a class="btn" href="delete?id=${x.id}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            hapus
+                        </a>
                     </td>
                 </tr>
                 </c:forEach>

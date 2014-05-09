@@ -15,7 +15,7 @@
     <body>
         <h1>Edit Pegawai</h1>
         
-        <form:form commandName="pegawai">
+        <form:form commandName="pegawai" cssClass="form-inline">
             <table border="1">
                 <tbody>
                     <tr>
