@@ -101,6 +101,16 @@ public class PegawaiDaoTest {
     }
     
     @Test
+    public void testCari(){
+        Long jumlahRecord = 1L;
+        
+        PegawaiDao pd = (PegawaiDao)ctx.getBean("pegawaiDao");
+        List<Pegawai> hasil = pd.cariSemuaPegawai("dad");
+        
+        Assert.assertEquals(new Long(jumlahRecord), new Long(hasil.size()));
+    }
+    
+    @Test
     public void testCariById(){
         PegawaiDao pd = (PegawaiDao)ctx.getBean("pegawaiDao");
         Assert.assertNotNull(pd.cariById(100));

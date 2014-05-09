@@ -78,7 +78,8 @@
             </div>
         </div>
 
-        <div class="container">    <decorator:body></decorator:body>
+        <div class="container">    
+            <decorator:body></decorator:body>
         </div> <!-- /container -->
 
 

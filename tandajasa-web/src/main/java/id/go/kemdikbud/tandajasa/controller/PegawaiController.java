@@ -11,6 +11,7 @@ import id.go.kemdikbud.tandajasa.dao.PegawaiDao;
 import id.go.kemdikbud.tandajasa.domain.Golongan;
 import id.go.kemdikbud.tandajasa.domain.Pegawai;
 import id.go.kemdikbud.tandajasa.editor.GolonganEditor;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,10 @@ public class PegawaiController {
     }
     
     @RequestMapping("/pegawai/list")
-    public ModelMap daftarPegawai(){
+    public ModelMap daftarPegawai(@RequestParam(required = false) String search){
         System.out.println("Daftar Pegawai");
-        List<Pegawai> data = pegawaiDao.cariSemuaPegawai();
+        List<Pegawai> data = new ArrayList<Pegawai>();
+        data.addAll(pegawaiDao.cariSemuaPegawai(search));
         
         ModelMap mm = new ModelMap();
         mm.addAttribute("daftarPegawai", data);

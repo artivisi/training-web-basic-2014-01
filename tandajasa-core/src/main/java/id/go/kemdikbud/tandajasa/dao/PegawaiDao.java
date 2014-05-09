@@ -42,6 +42,20 @@ public class PegawaiDao {
                 .list();
     }
     
+    public List<Pegawai> cariSemuaPegawai(String search){
+        if(search == null || search.isEmpty()) {
+            return cariSemuaPegawai();
+        }
+        
+        return sessionFactory.getCurrentSession()
+                .createQuery("select p from Pegawai p "
+                        + "where lower(p.nama) like lower(:search) "
+                        + "or p.nip like :search "
+                        + "order by p.nip")
+                .setParameter("search", "%"+search+"%")
+                .list();
+    }
+    
     public Pegawai cariById(Integer id) {
         if(id == null){
             return null;
